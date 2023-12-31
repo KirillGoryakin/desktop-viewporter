@@ -1,6 +1,7 @@
 'use strict';
 
 let enabled = false;
+let savedContent;
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type !== 'toggle') return;
@@ -8,15 +9,29 @@ chrome.runtime.onMessage.addListener((request) => {
   enabled = !enabled;
 
   const viewport = document.querySelector('meta[name=viewport]');
-  if (!viewport) {
-    alert('meta viewport is not found!');
-    return;
+  if (savedContent === undefined) {
+    if (viewport) {
+      savedContent = viewport.getAttribute('content');
+    } else {
+      savedContent = null;
+    }
   }
   
   if (enabled) {
-    viewport.setAttribute('content', 'width=1440px, height=device-height, initial-scale=1.0');
+    if (savedContent) {
+      viewport.setAttribute('content', 'width=1440px, height=device-height, initial-scale=1.0');
+    } else {
+      const metaTag = document.createElement('meta');
+      metaTag.name = 'viewport';
+      metaTag.content = 'width=1440px, height=device-height, initial-scale=1.0';
+      document.getElementsByTagName('head')[0].appendChild(metaTag);
+    }
   } else {
-    viewport.setAttribute('content', 'width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0');
+    if (savedContent) {
+      viewport.setAttribute('content', savedContent);
+    } else {
+      viewport.remove();
+    }
   }
 });
 
