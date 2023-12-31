@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener((request) => {
     }
     
     if (enabled) {
-      viewport.setAttribute('content', 'width=1024px, height=device-height, initial-scale=1.0, minimum-scale=1.0');
+      viewport.setAttribute('content', 'width=1440px, height=device-height, initial-scale=1.0');
     } else {
       viewport.setAttribute('content', 'width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0');
     }
