@@ -4,9 +4,9 @@ An extension for IOS Safari browser, which allows you to change your viewport wi
 
 After activation the extension in Settings, go to your webpage, click **aA** and click on **Desktop Viewporter** to toggle your viewport width.
 
-## Install
+<!--## Install
 
-This extension can be installed from the App Store via [this link]() <!-- TODO: Add chrome extension link inside parenthesis -->
+This extension can be installed from the App Store via [this link]()  TODO: Add chrome extension link inside parenthesis -->
 
 ## Development
 
